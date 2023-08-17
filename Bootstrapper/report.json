@@ -1,0 +1,36 @@
+{
+  "version": 0,
+  "root_name": "bootstrapper",
+  "workspace_crates": {
+    "bootstrapper": {
+      "full_path": "D:\\Work\\RPacked\\Bootstrapper\\Cargo.toml",
+      "dependencies": {
+        "widestring": {
+          "original_features": [
+            "std"
+          ],
+          "successfully_removed_features": [
+            "std"
+          ],
+          "unsuccessfully_removed_features": []
+        },
+        "netcorehost": {
+          "original_features": [
+            "net8_0",
+            "net7_0",
+            "latest",
+            "nethost-download"
+          ],
+          "successfully_removed_features": [
+            "net8_0",
+            "net7_0"
+          ],
+          "unsuccessfully_removed_features": [
+            "latest",
+            "nethost-download"
+          ]
+        }
+      }
+    }
+  }
+}
