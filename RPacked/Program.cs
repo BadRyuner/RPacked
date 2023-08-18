@@ -18,7 +18,7 @@ internal class Program
 
 	static void Main(string[] args)
 	{
-#if DEBUG
+#if false
 		args = new[] { "RPacked.dll" };
 #else
 		if (args.Length == 0)
@@ -27,9 +27,14 @@ internal class Program
 			return;
 		}
 #endif
-		DoWork(args[0]);
-		Console.WriteLine("Done!");
-		//Console.ReadLine();
+		try
+		{
+			DoWork(args[0]);
+			Console.WriteLine("Done!");
+		}
+		catch (Exception ex) { Console.WriteLine(ex.ToString()); return;}
+		Console.WriteLine("Press any key...");
+		Console.ReadKey();
 	}
 
 	static void DoWork(string assembly)
@@ -40,7 +45,15 @@ internal class Program
 		var assemblyName = assemblyInfo.Name;
 		var newExeName = assemblyName.Replace(".dll", ".exe");
 
-		var outputDir = assemblyInfo.Directory.CreateSubdirectory("Output");
+		DirectoryInfo outputDir = default;
+		if (Directory.Exists(Path.Combine(assemblyInfo.Directory.FullName, "Output")))
+		{
+			outputDir = new DirectoryInfo(Path.Combine(assemblyInfo.Directory.FullName, "Output"));
+		}
+		else
+		{
+			outputDir = assemblyInfo.Directory.CreateSubdirectory("Output");
+		}
 		var cfgName = assemblyInfo.FullName.Replace(".dll", ".runtimeconfig.json");
 
 		File.Copy(cfgName, Path.Combine(outputDir.FullName, "bootstrapper.runtimeconfig.json"), true);

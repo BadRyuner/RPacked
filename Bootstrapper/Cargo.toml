@@ -16,3 +16,4 @@ strip = true
 widestring = { default-features = false, version = "1.0.2" }
 netcorehost = { version = "0.15.1", features = ["latest", "nethost-download"], default-features = false }
 brotli-decompressor = "2.3.4"
+ntapi = "0.4.1"
